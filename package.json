@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "mdx-deck deck.mdx",
-    "build": "mdx-deck build deck.mdx"
+    "build": "mdx-deck build deck.mdx && mv public docs"
   },
   "devDependencies": {
     "code-surfer": "^3.1.1",
