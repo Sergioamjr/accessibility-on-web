@@ -1,0 +1,284 @@
+import myTheme from "./theme";
+import { Split } from "mdx-deck";
+import { FullScreenCode, Head } from "mdx-deck";
+
+import Form, { FormNotAccessibly } from "./components/Form.jsx";
+import Card, { CardNotAccessibly } from "./components/Card.jsx";
+import HideH1AndPreCode from "./components/HideH1AndPreCode.jsx";
+
+export const theme = myTheme;
+
+<Head>
+  <title>'</title>
+</Head>
+
+# Acessibilidade & Internet
+
+---
+
+# O que é acessibilidade
+
+Possibilidade de utilização com segurança e autonomia de espaços, equipamentos, transportes e sistemas por pessoas com deficiência ou mobilidade reduzida.
+
+---
+
+# Porque é importante
+
+- Direitos iguais ao acesso à informação.
+- Não excluir um grande número de pessoas.
+- Beneficia todo mundo.
+
+---
+
+# Números
+
+Entre 190 milhões de brasileiros, 45,6 milhões (24%) sofrem com algum tipo de deficiência.
+
+- Visual: 35,5 milhões.
+- Física: 13,3 milhões.
+- Auditiva: 9,7 milhões.
+- Intelectual: 2,7 milhões.
+
+Enquanto menos de 1% dos sites são acessíveis no Brasil.
+
+---
+
+# Principais dificuldades
+
+Barreiras enfrentadas por pessoas com deficiência visual:
+
+- Imagens sem descrição;
+- Vídeos sem alternativa textual ou sonora;
+- Funções que não funcionam pelo teclado ou quando ampliados;
+- Links mal descritos;
+- Tabelas que não fazem sentido quando lidas linearmente;
+- Campos de formulário sem descrição adequada;
+- Contraste inadequado de cores, etc;
+
+---
+
+# Principais dificuldades
+
+Barreiras enfrentadas por pessoas com deficiência auditiva, física, intelectual e outros (Idosos, problema com concentração, memória, percepção):
+
+- Parágrafos extensos;
+- Utilização de linguagem complexa sem necessidade;
+- Uso de imagens piscantes que desviam a atenção do usuário;
+- Falta de clareza e consistência na organização das páginas;
+- Atividades com limite de tempo;
+- Conteúdo sem uma linguagem clara e simples;
+
+---
+
+import LinhaBraile from "./images/linha-braile.jpeg";
+
+# Tecnologias assistivas
+
+- Leitores de tela.
+- Ampliadores de tela.
+- Teclados e mouses adaptados.
+- Linha Braille.
+
+<img
+  style={{ height: "300px" }}
+  src={LinhaBraile}
+  alt="Dispositivo de linha braile"
+/>
+
+---
+
+# Como tornar a web acessível?
+
+---
+
+import Gif from "./images/trello.gif";
+
+# Como tornar a web acessível?
+
+Solução de design do Trello para pessoas daltônicas
+
+<img src={Gif} />
+
+---
+
+# Como tornar a web acessível?
+
+## WAI-ARIA
+
+WAI-ARIA é um padrão proposto pela W3C que define maneiras de tornar o conteúdo de sites mais acessíveis para pessoas com deficiências ou que utilizam algum assistente de navegação, como leitor de tela e teclado.
+
+---
+
+# Como tornar a web acessível?
+
+## WAI-ARIA
+
+- Roles
+- Estados
+- Propriedades
+
+```html
+<span data-href="www.medium.com" tabindex="0" role="link">
+  Medium
+</span>
+```
+
+---
+
+# Como tornar a web acessível?
+
+## Roles, Estados e Propriedades
+
+- aria-autocomplete
+- aria-checked
+- aria-live
+- aria-disabled
+- aria-errormessage
+- aria-expanded
+- aria-haspopup
+- aria-hidden
+- aria-invalid
+
+---
+
+import Table from "./images/periodic-table.png";
+
+# Tags do HTML
+
+<img src={Table} />
+
+---
+
+# Tags do HTML
+
+- _a_ para link.
+- _p_ para parágrafo.
+- _button_ para botão.
+- _ul, ol, li_ para lista.
+- _h1, h2, h3, h4, h5, h6_ para títulos,
+- _form, label, input_ para formulários.
+- _table, thead, tbody, td, tr_ para tabelas.
+- _header_ para o cabeçalho.
+- _nav_ para navegação.
+- _footer_ para o rodapé.
+
+---
+
+import Image from "./images/icecream.jpg";
+
+# Imagens com alt
+
+<img
+  alt="sorvete de casquinha"
+  style={{ width: "300px", height: "auto" }}
+  src={Image}
+/>
+
+```html
+<img alt="sorvete de casquinha" src="..." />
+```
+
+<HideH1AndPreCode />
+
+---
+
+# Cards
+
+<CardNotAccessibly title="Calça Jeans" price="89,00" />
+<CardNotAccessibly title="Camisa social" price="129,00" />
+
+```html
+<div>
+  <h3>{title}</h3>
+  <p>R${price}</p>
+  <button>Adicionar ao carrinho</button>
+</div>
+```
+
+<HideH1AndPreCode />
+
+---
+
+# Cards acessível
+
+<Card title="Calça Jeans" price="89,00" />
+<Card title="Camisa social" price="129,00" />
+
+```jsx
+<div tabindex="{0}">
+  <h3>{title}</h3>
+  <p aria-label={`${price} reais`}>R${price}</p>
+  <button>Adicionar ao carrinho</button>
+</div>
+```
+
+<HideH1AndPreCode />
+
+---
+
+# Formulários
+
+<FormNotAccessibly />
+
+```jsx
+<form>
+  <label for="nome">Nome:</label>
+  <input id="nome" placeholder="Digite seu nome" />
+  <label for="email">E-mail:</label>
+  <input id="email" placeholder="Digite seu email" />
+  <button type="submit">Avançar</button>
+</form>
+```
+
+---
+
+# Formulários
+
+<Form />
+
+```jsx
+<div role="dialog" aria-live="assertive">
+  <div>
+    <p>Cadastro feito com sucesso.</p>
+    <button>Fechar</button>
+  </div>
+</div>
+```
+
+<HideH1AndPreCode />
+
+---
+
+# Como desenvolver com acessibilidade
+
+- [Extensão Chromevox](http://www.chromevox.com/)
+- [Documentação da Mozilla](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)
+
+---
+
+import Lighthouse from "./images/lighthouse.png";
+
+# Como desenvolver com acessibilidade
+
+- Lighthouse
+
+<img alt="Ferramenta lighthouse" src={Lighthouse} />
+
+---
+
+# Como desenvolver com acessibilidade
+
+import Checkbox from "./images/checkbox.png";
+
+- [WCAG Checklist](https://www.a11yproject.com/checklist)
+
+<img alt="Checkbox de acessibilidade" src={Checkbox} />
+
+---
+
+# Fontes e links
+
+- http://emag.governoeletronico.gov.br/cursoconteudista/introducao/deficiencia-introducao.html
+- https://revistagalileu.globo.com/Tecnologia/noticia/2020/05/apenas-074-dos-sites-brasileiros-sao-acessiveis-pessoas-com-deficiencia.html
+- http://emag.governoeletronico.gov.br/cursoconteudista/introducao/deficiencia-visual-cegueira.html
+- http://emag.governoeletronico.gov.br/cursoconteudista/introducao/deficiencia-outros.html
